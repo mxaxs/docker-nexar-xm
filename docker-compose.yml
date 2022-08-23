@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  nats: 
+    image: nats:latest
+    command: "-js -c /etc/nats/nats.conf"
+    volumes:
+      - ./nats.conf:/etc/nats/nats.conf   
+    ports:
+      - 4222:4222
+  service:
+    image: alephp/moleculerjs:latest
+    container_name: moleculerjs
+    env_file: docker-compose.env
+    volumes:
+      - ./:/home/node/app
+    environment:
+      SERVICE: sample
+      NODE_ENV: develop
