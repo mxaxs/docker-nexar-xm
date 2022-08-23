@@ -12,4 +12,4 @@ RUN npm install --production
 
 COPY . .
 
-CMD ["npm", "start", "unset", "HOST"]
+CMD ["npm", "start"]
