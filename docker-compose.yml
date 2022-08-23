@@ -6,6 +6,8 @@ services:
     command: "-js -c /etc/nats/nats.conf"
     volumes:
       - ./nats.conf:/etc/nats/nats.conf   
+    expose:
+      - 4222
     ports:
       - 4222:4222
   service:
