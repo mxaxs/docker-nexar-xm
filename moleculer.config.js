@@ -174,8 +174,8 @@ module.exports = {
 					nats: {
 						url: process.env.NATS_URL,
 						connectionOptions: {
-							user: process.env.NATS_USERNAME,
-							pass: process.env.NATS_PASSWORD
+							user: process.env.NATS_USERNAME ||"ruser",
+							pass: process.env.NATS_PASSWORD || "T0pS3cr3t"
 						}
 					}
 				}
