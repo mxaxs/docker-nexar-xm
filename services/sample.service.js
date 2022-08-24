@@ -5,7 +5,7 @@ module.exports = {
 	channels: {
 		"sample.user-added": {
 			async handler ( payload ) {
-				console.log( "sample.processes", payload );
+				console.log( "sample.user-added", payload );
 				return payload;
 			}
 		}
