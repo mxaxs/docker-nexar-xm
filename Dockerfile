@@ -1,6 +1,6 @@
 FROM node:current-alpine
 
-RUN npm install -g npm@8.18.0
+RUN npm install npm@8.18.0
 
 ENV NODE_ENV=production
 
