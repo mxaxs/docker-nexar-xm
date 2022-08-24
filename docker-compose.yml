@@ -9,7 +9,11 @@ services:
     expose:
       - 4222
     ports:
-      - 4222:4222
+      - '4222:4222'
+      - '8222:8222'
+      - '9222:9222'
+    networks:
+      - main
   service:
     image: alephp/moleculerjs:latest
     container_name: moleculerjs
@@ -19,7 +23,12 @@ services:
     environment:
       SERVICE: sample
       NODE_ENV: develop
-      
+
     ports:
       - 8080:8080
       - 3000:3000
+    networks:
+      - main
+
+networks:
+  main:
