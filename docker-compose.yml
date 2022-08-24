@@ -7,13 +7,13 @@ services:
     volumes:
       - ./nats.conf:/etc/nats/nats.conf   
     expose:
-      - 4222
+      - '4222'
     ports:
       - 4222:4222
       - 8222:8222
       - 9222:9222
-    networks:
-      - main
+    hostname: nats
+    
   service:
     image: alephp/moleculerjs:latest
     container_name: moleculerjs
@@ -27,8 +27,4 @@ services:
     ports:
       - 8080:8080
       - 3000:3000
-    networks:
-      - main
-
-networks:
-  main:
+    
