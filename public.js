@@ -3,7 +3,7 @@
 		const { connect, StringCodec } = require( "nats" );
 		const sc = new StringCodec();
 		const nc = await connect( {
-			servers: "0.0.0.0:4222",
+			servers: "localhost:4222",
 			user: "ruser",
 			pass: "T0pS3cr3t"
 		} );

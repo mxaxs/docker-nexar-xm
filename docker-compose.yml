@@ -22,7 +22,7 @@ services:
       - ./:/home/node/app
     environment:
       SERVICE: sample
-      NODE_ENV: develop
+      NODE_ENV: production
 
     ports:
       - 8080:8080
