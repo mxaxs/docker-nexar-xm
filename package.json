@@ -27,6 +27,7 @@
   "dependencies": {
     "@moleculer/channels": "^0.1.2",
     "moleculer": "^0.14.16",
+    "moleculer-web": "^0.10.4",
     "nats": "^2.7.1"
   },
   "engines": {

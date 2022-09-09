@@ -1,6 +1,48 @@
 version: "3.8"
 
 services:
+  api:
+    build:
+      context: .
+    image: moleculer-nano
+    env_file: docker-compose.env
+    environment:
+      SERVICES: api
+      PORT: 3000
+    depends_on:
+      - nats
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-gw.rule=PathPrefix(`/`)"
+      - "traefik.http.services.api-gw.loadbalancer.server.port=3000"
+    
+
+  greeter:
+    build:
+      context: .
+    image: moleculer-nano
+    env_file: docker-compose.env
+    environment:
+      SERVICES: greeter
+    depends_on:
+      - nats
+    
+
+
+  traefik:
+    image: traefik:v2.1
+    command:
+      - "--api.insecure=true" # Don't do that in production!
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+    ports:
+      - 3000:80
+      - 3001:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    
+
+
   nats: 
     image: nats:latest
     command: "-js -c /etc/nats/nats.conf"
@@ -9,22 +51,27 @@ services:
     expose:
       - '4222'
     ports:
-      - 4222:4222
-      - 8222:8222
-      - 9222:9222
+      - '4222:4222'
     hostname: nats
     
   service:
     image: alephp/moleculerjs:latest
-    container_name: moleculerjs
+    container_name: sample
     env_file: docker-compose.env
     volumes:
       - ./:/home/node/app
     environment:
       SERVICE: sample
       NODE_ENV: production
-
+    expose:
+      - 4000
     ports:
-      - 8080:8080
-      - 3000:3000
+      - 4000:4000
     
+
+
+networks:
+  internal:
+
+volumes:
+  data:
